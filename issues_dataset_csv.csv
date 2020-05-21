@@ -1,0 +1,56 @@
+﻿project,contract,func/snippet,func_origin_contract,func/snippet_line_nos.,vulnerability_type,severity
+golem,Faucet.sol,GolemNetworkToken.finalize(),contracts/GolemNetworkToken.sol,#170-193,arbitrary-send,High
+golem,Faucet.sol,Faucet.create(),contracts/Faucet.sol,#16-20,unused-return,Medium
+golem,Faucet.sol,GolemNetworkToken.migrate(uint256),contracts/GolemNetworkToken.sol,#101-115,reentrancy-events,Low
+golem,Faucet.sol,Pragma version^0.4.16,contracts/Faucet.sol,#1,solc-version,Informational
+golem,Faucet.sol,Pragma version^0.4.16,contracts/GolemNetworkToken.sol,#1,solc-version,Informational
+golem,Faucet.sol,"Parameter GolemNetworkToken.transfer(address,uint256)._to",contracts/GolemNetworkToken.sol,#73,naming-convention,Informational
+golem,Faucet.sol,"Parameter GolemNetworkToken.transfer(address,uint256)._value",contracts/GolemNetworkToken.sol,#73,naming-convention,Informational
+golem,Faucet.sol,Parameter GolemNetworkToken.balanceOf(address)._owner,contracts/GolemNetworkToken.sol,#92,naming-convention,Informational
+golem,Faucet.sol,Parameter GolemNetworkToken.migrate(uint256)._value,contracts/GolemNetworkToken.sol,#101,naming-convention,Informational
+golem,Faucet.sol,Parameter GolemNetworkToken.setMigrationAgent(address)._agent,contracts/GolemNetworkToken.sol,#122,naming-convention,Informational
+golem,Faucet.sol,Parameter GolemNetworkToken.setMigrationMaster(address)._master,contracts/GolemNetworkToken.sol,#130,naming-convention,Informational
+golem,Faucet.sol,Constant GolemNetworkToken.tokenCreationRate ,contracts/GolemNetworkToken.sol,#17,naming-convention,Informational
+golem,Faucet.sol,Constant GolemNetworkToken.tokenCreationCap,contracts/GolemNetworkToken.sol,#20,naming-convention,Informational
+golem,Faucet.sol,Constant GolemNetworkToken.tokenCreationMin,contracts/GolemNetworkToken.sol,#21,naming-convention,Informational
+golem,Faucet.sol,GolemNetworkToken.slitherConstructorConstantVariables(),contracts/GolemNetworkToken.sol,#17,too-many-digits,Informational
+golem,GNTDeposit.sol,GNTDeposit.isLocked(address),contracts/GNTDeposit.sol,#64-66,incorrect-equality,Medium
+golem,GNTDeposit.sol,"GNTDeposit.burn(address,uint256)",contracts/GNTDeposit.sol,#105-108,reentrancy-events,Low
+golem,GNTDeposit.sol,"GNTDeposit.reimburseForNoPayment(address,address,uint256,uint256)",contracts/GNTDeposit.sol,#123-134,reentrancy-events,Low
+golem,GNTDeposit.sol,"GNTDeposit.reimburseForSubtask(address,address,uint256,bytes32)",contracts/GNTDeposit.sol,#110-121,reentrancy-events,Low
+golem,GNTDeposit.sol,"GNTDeposit.reimburseForVerificationCosts(address,uint256,bytes32)",contracts/GNTDeposit.sol,#136-146,reentrancy-events,Low
+golem,GNTDeposit.sol,GNTDeposit.withdraw(address),contracts/GNTDeposit.sol,#97-103,reentrancy-events,Low
+golem,GNTDeposit.sol,GNTDeposit.isLocked(address),contracts/GNTDeposit.sol,#64-66,timestamp,Low
+golem,GNTDeposit.sol,GNTDeposit.isTimeLocked(address),contracts/GNTDeposit.sol,#68-70,timestamp,Low
+golem,GNTDeposit.sol,GNTDeposit.isUnlocked(address),contracts/GNTDeposit.sol,#72-74,timestamp,Low
+golem,GNTDeposit.sol,"^0.4.16 Different versions of Solidity is used ['^0.4.16', '^0.4.18', '^0.4.19']",contracts/GNTDeposit.sol,#1,pragma,Informational
+golem,GNTDeposit.sol,"^0.4.19 Different versions of Solidity is used ['^0.4.16', '^0.4.18', '^0.4.19']",contracts/ReceivingContract.sol,#1,pragma,Informational
+golem,GNTDeposit.sol,"^0.4.18 Different versions of Solidity is used ['^0.4.16', '^0.4.18', '^0.4.19']",contracts/open_zeppelin/ERC20.sol,#1,pragma,Informational
+golem,GNTDeposit.sol,"^0.4.18 Different versions of Solidity is used ['^0.4.16', '^0.4.18', '^0.4.19']",contracts/open_zeppelin/ERC20Basic.sol,#1,pragma,Informational
+golem,GNTDeposit.sol,Pragma version^0.4.16,contracts/GNTDeposit.sol,#1,solc-version,Informational
+golem,GNTDeposit.sol,Pragma version^0.4.19,contracts/ReceivingContract.sol,#1,solc-version,Informational
+golem,GNTDeposit.sol,Pragma version^0.4.18,contracts/open_zeppelin/ERC20.sol,#1,solc-version,Informational
+golem,GNTDeposit.sol,Pragma version^0.4.18,contracts/open_zeppelin/ERC20Basic.sol,#1,solc-version,Informational
+golem,GNTDeposit.sol,Parameter GNTDeposit.balanceOf(address)._owner,contracts/GNTDeposit.sol,#60,naming-convention,Informational
+golem,GNTDeposit.sol,Parameter GNTDeposit.isLocked(address)._owner,contracts/GNTDeposit.sol,#64,naming-convention,Informational
+golem,GNTDeposit.sol,Parameter GNTDeposit.isTimeLocked(address)._owner,contracts/GNTDeposit.sol,#68,naming-convention,Informational
+golem,GNTDeposit.sol,Parameter GNTDeposit.isUnlocked(address)._owner,contracts/GNTDeposit.sol,#72,naming-convention,Informational
+golem,GNTDeposit.sol,Parameter GNTDeposit.getTimelock(address)._owner,contracts/GNTDeposit.sol,#76,naming-convention,Informational
+golem,GNTDeposit.sol,"Parameter GNTDeposit.onTokenReceived(address,uint256,bytes32)._from",contracts/GNTDeposit.sol,#92,naming-convention,Informational
+golem,GNTDeposit.sol,"Parameter GNTDeposit.onTokenReceived(address,uint256,bytes32)._amount",contracts/GNTDeposit.sol,#92,naming-convention,Informational
+golem,GNTDeposit.sol,Parameter GNTDeposit.withdraw(address)._to,contracts/GNTDeposit.sol,#97,naming-convention,Informational
+golem,GNTDeposit.sol,"Parameter GNTDeposit.burn(address,uint256)._whom",contracts/GNTDeposit.sol,#105,naming-convention,Informational
+golem,GNTDeposit.sol,"Parameter GNTDeposit.burn(address,uint256)._burn",contracts/GNTDeposit.sol,#105,naming-convention,Informational
+golem,GNTDeposit.sol,"Parameter GNTDeposit.reimburseForSubtask(address,address,uint256,bytes32)._requestor ",contracts/GNTDeposit.sol,#111,naming-convention,Informational
+golem,GNTDeposit.sol,"Parameter GNTDeposit.reimburseForSubtask(address,address,uint256,bytes32)._provider",contracts/GNTDeposit.sol,#112,naming-convention,Informational
+golem,GNTDeposit.sol,"Parameter GNTDeposit.reimburseForSubtask(address,address,uint256,bytes32)._amount ",contracts/GNTDeposit.sol,#113,naming-convention,Informational
+golem,GNTDeposit.sol,"Parameter GNTDeposit.reimburseForSubtask(address,address,uint256,bytes32)._subtask_id",contracts/GNTDeposit.sol,#114,naming-convention,Informational
+golem,GNTDeposit.sol,"Parameter GNTDeposit.reimburseForNoPayment(address,address,uint256,uint256)._requestor",contracts/GNTDeposit.sol,#124,naming-convention,Informational
+golem,GNTDeposit.sol,"Parameter GNTDeposit.reimburseForNoPayment(address,address,uint256,uint256)._provider",contracts/GNTDeposit.sol,#125,naming-convention,Informational
+golem,GNTDeposit.sol,"Parameter GNTDeposit.reimburseForNoPayment(address,address,uint256,uint256)._amount",contracts/GNTDeposit.sol,#126,naming-convention,Informational
+golem,GNTDeposit.sol,"Parameter GNTDeposit.reimburseForNoPayment(address,address,uint256,uint256)._closure_time",contracts/GNTDeposit.sol,#127,naming-convention,Informational
+golem,GNTDeposit.sol,"Parameter GNTDeposit.reimburseForVerificationCosts(address,uint256,bytes32)._from",contracts/GNTDeposit.sol,#137,naming-convention,Informational
+golem,GNTDeposit.sol,"Parameter GNTDeposit.reimburseForVerificationCosts(address,uint256,bytes32)._amount",contracts/GNTDeposit.sol,#138,naming-convention,Informational
+golem,GNTDeposit.sol,"Parameter GNTDeposit.reimburseForVerificationCosts(address,uint256,bytes32)._subtask_id",contracts/GNTDeposit.sol,#139,naming-convention,Informational
+golem,GNTDeposit.sol,Variable GNTDeposit.withdrawal_delay,contracts/GNTDeposit.sol,#9,naming-convention,Informational
+golem,GNTDeposit.sol,Variable GNTDeposit.locked_until,contracts/GNTDeposit.sol,#16,naming-convention,Informational
