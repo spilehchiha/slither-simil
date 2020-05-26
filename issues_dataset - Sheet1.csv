@@ -1,0 +1,13 @@
+project_id,contract,func,func_origin_contract,func_line_nos.,vulnerability_type,severity
+golem,GNTDeposit.sol,"^0.4.16 Different versions of Solidity is used ['^0.4.16', '^0.4.18', '^0.4.19']",contracts/GNTDeposit.sol,#1,pragma,Informational
+golem,TokenProxy.sol,"^0.4.19 Different versions of Solidity is used ['^0.4.16', '^0.4.18', '^0.4.19']",contracts/GNTDeposit.sol,#1,pragma,Informational
+golem,ERC20.sol,"Function ERC20.approve(address,uint256)",contracts/open_zeppelin/ERC20.sol,#13,timing,Medium
+golem,GolemNetworkTokenBatching_inst.sol,"Function GolemNetworkTokenBatching.batchTransfer(bytes32,uint256)",contracts/GolemNetworkTokenBatching_inst.sol,#30-49,data-validation,Low
+golem,TokenProxy.sol,Function TokenProxy.withdraw(uint256),contracts/TokenProxy.sol,#110-112,data-validation,Informational
+golem,TokenProxy.sol,Function TokenProxy.transferFromGate(),contracts/TokenProxy.sol,#90-108,data-validation,Informational
+golem,GolemNetworkTokenBatching_inst.sol,"Function GolemNetworkTokenBatching.batchTransfer(bytes32,uint256)",contracts/GolemNetworkTokenBatching_inst.sol,#30-49,data-validation,High
+golem,GNTDeposit.sol,"Function GNTDeposit.burn(address,uint256)",contracts/GNTDeposit.sol,#105-108,configuration,High
+golem,GNTDeposit.sol,Function GNTDeposit.withdraw(address),contracts/GNTDeposit.sol,#97-103,data-validation,Medium
+golem,GNTDeposit.sol,"Function GNTDeposit.onTokenReceived(address,uint256,bytes32)",contracts/GNTDeposit.sol,#92-95,access-controls,High
+golem,GNTDeposit.sol,"Function GNTDeposit.onTokenReceived(address,uint256,bytes32)",contracts/GNTDeposit.sol,#92-95,auditing-and-logging,Low
+golem,GolemNetworkTokenBatching_inst.sol,"Function GolemNetworkTokenBatching.batchTransfer(bytes32,uint256)",contracts/GolemNetworkTokenBatching_inst.sol,#30-49,denial-of-service,Low
