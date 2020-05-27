@@ -1,9 +1,5 @@
 import csv
-import json
-import ast
-import re
 from slither import Slither
-import time
         
 csv_input_file_path = "../../../issues-dataset/issues_dataset - Sheet1.csv"
 
@@ -15,12 +11,13 @@ def csv_to_json(file_path):
         for row in csv.DictReader(input_file):
             csv_data.append(row)
     input_file.close()
-    return ast.literal_eval(json.dumps(csv_data))
+    return csv_data
 
 def json_search_and_extraction(file_path, name):
-    json_object = csv_to_json(file_path)
-    json_element = [obj for obj in json_object if obj['func']==name][0]
-    return "../" + json_element['project_id'] + '/' + json_element['func_origin_contract']
+    csv_object = csv_to_json(file_path)
+    for row in csv_object:
+        if search_term == row['func']:
+            return row['func_origin_contract']
 
 def run_slither(slithir_output_path): 
     # Init slither
