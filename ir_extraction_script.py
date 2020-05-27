@@ -1,10 +1,9 @@
 import csv
 import json
 import ast
-#import subprocess
 import re
 from slither import Slither
-from slither.printers.all_printers import PrinterSlithIR
+import time
         
 csv_input_file_path = "../../../issues-dataset/issues_dataset - Sheet1.csv"
 
@@ -23,24 +22,21 @@ def json_search_and_extraction(file_path, name):
     json_element = [obj for obj in json_object if obj['func']==name][0]
     return "../" + json_element['project_id'] + '/' + json_element['func_origin_contract']
 
-def run_slither(slithir_output_path):
-    slithir_output = open(slithir_output_path, 'w')    
+def run_slither(slithir_output_path): 
     # Init slither
     slither = Slither(json_search_and_extraction(csv_input_file_path, search_term))
-    slither.register_printer(PrinterSlithIR)
-    slithir_output.write(json.dumps(slither.run_printers()))
-    slithir_output.close()
+    
+    # Extracts the function name without the 'Function' keyword from the user input
+    function_name = search_term.split(r" ")[1]
 
-def load_slithir_data(slithir_output_path):
-    run_slither(slithir_output_path)
-    with open(slithir_output_path, 'r') as slithir_output:
-        json_data = json.load(slithir_output)
-    return json_data[0]['description']
-
-def slithir_search_and_extraction(slithir_output_path):
-    regex_pattern = "\\n\\t" + re.escape(search_term) + "(.*?)\\n\\tFunction" 
-    return re.search(regex_pattern, load_slithir_data(slithir_output_path), flags=re.DOTALL).group(1)
+    for function in slither.functions:
+        if function.canonical_name == function_name:
+            for node in function.nodes:
+                if node.expression:
+                    print('\t\tExpression: {}'.format(node.expression))
+                    print('\t\tIRs:')
+                    for ir in node.irs:
+                        print('\t\t\t{}'.format(ir))
 
 if __name__ == "__main__":
-    output = slithir_search_and_extraction('./slithir.json')
-    print (output)
+    run_slither('./slithir.json')
