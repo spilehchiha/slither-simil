@@ -18,15 +18,15 @@ def run_slither(slithir_output_path):
                 for function in contract.functions:
                     if function.canonical_name == element['func']:
                         if function.contract_declarer == contract:
-                            print('Contract: {}'.format(element['func'].split('.')[0]))
-                            print('Function: {}'.format(function.name))
+                            print('Contract: {}\t\tVulnerability: {}'.format(element['func'].split('.')[0], element['vulnerability_type']))
+                            print('''Function: {}\t\t\t\tSeverity: {}\n'''.format(function.name, element['severity']))
                             for node in function.nodes:
                                 if node.expression:
                                     print('\t\tExpression: {}'.format(node.expression))
                                     print('\t\tIRs:')
                                     for ir in node.irs:
                                         print('\t\t\t{}'.format(ir))
-                            print('\n')
+                            print('\n\n')
 
 if __name__ == "__main__": 
     run_slither('./slithir.json')
