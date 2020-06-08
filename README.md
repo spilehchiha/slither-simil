@@ -1,6 +1,6 @@
 The SlithIR representation extraction script should be located in the top-level directory as to the project to be analyzed in order to avoid compilation errors.
 
-Also, in order to successfully run the Slither-simil fork by `@spilehchiha`, you need to first clone the `smart-contract-clients` repository from ToB.
+Also, in order to successfully run [the Slither-simil fork by `@spilehchiha`](https://github.com/spilehchiha/slither), you need to first clone the `smart-contract-clients` repository from ToB.
 Then, `cd` into the `contracts_audited` directory, and then train or test.
 
 Training and testing procedures are almost the same as before, with the exception of using the keyword `trainfunction` instead of the usual `train`.
