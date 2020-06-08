@@ -2,7 +2,7 @@ import csv
 import json
 import ast
 
-csv_input_file_path = "../../../issues-dataset/issues_dataset - Sheet1.csv"
+csv_input_file_path = "../../../issues-dataset/issues_dataset - Sheet9.csv"
 
 def csv_to_json(file_path): 
     with open (file_path, 'r') as input_file:
