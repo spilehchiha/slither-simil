@@ -19,11 +19,12 @@ if __name__ == "__main__":
         v = f.get_word_vector(w)
         vstr = ""
         for vi in v:
-            vstr +=  str(vi) + "\t"
+            #vstr +=  str(vi) + "\t"
+            vstr += " " + str(vi)
         try:
-            #print(w + vstr)
+            print(w + vstr)
             #print(w)
-            print(vstr)
+            #print(vstr)
         except IOError as e:
             if e.errno == errno.EPIPE:
                 pass
