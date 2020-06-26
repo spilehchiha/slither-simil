@@ -1,20 +1,8 @@
 # SlithIR Extraction and Processing
 
-The SlithIR extraction script should be located in the top-level directory as to the project to be analyzed in order for it to avoid compilation errors.
-
-Run the script in the `smart-contract-clients` directory.
-
-Also, in order to successfully run [the Slither-simil fork by `@spilehchiha`](https://github.com/spilehchiha/slither), you need to first clone the `smart-contract-clients` repository from ToB.
-Then, `cd` into the `contracts_audited` directory, and then train or test.
-
-Training and testing procedures are almost the same as before, with the exception of using the keyword `trainfunction` instead of the usual `train`.
-
-
-While training, a `cache.npz` file of the input serialized file is also created in the same directory which can be used while testing.
-
-To test:
+Fork this specific branch and build from this version of `Slither-simil`:
 ```
-slither-simil test [created_model_name.bin] --filename [file_name] --fname [function_name] --input cache.npz --ntop 35
+git clone -b slither-simil-vul-function  https://github.com/spilehchiha/slither.git
 ```
 
 Some SlithIRs have already been extracted and are located as `slithIR_serialized_file.`
