@@ -2,11 +2,9 @@ import logging
 import os
 import subprocess
 import pickle
-
 import csv
 import json
 import ast
-
 from slither import Slither
 
 extract_logger = logging.getLogger("Slither-extract")
