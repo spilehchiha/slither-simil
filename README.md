@@ -1,5 +1,12 @@
 # SlithIR Extraction and Processing
 
+Do not yet test this tool on `.zip` smart contracts, but on `.sol` ones.
+
+Use fastText version 0.2.0 and not an upgraded one:
+```
+$ pip3 install https://github.com/facebookresearch/fastText/archive/0.2.0.zip --user
+```
+
 Fork this specific branch and build from this version of `Slither-simil`:
 ```
 git clone -b slither-simil-vul-function  https://github.com/spilehchiha/slither.git
