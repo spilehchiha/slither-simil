@@ -6,6 +6,8 @@ import csv
 import json
 import ast
 from slither import Slither
+import sys
+import io
 
 extract_logger = logging.getLogger("Slither-extract")
 compiler_logger = logging.getLogger("CryticCompile")
@@ -35,7 +37,17 @@ def encode_function(input_csv, client_list, **kwargs):
             if (datum['project_id'] != prev_proj_id): print('processing %s contracts' % datum['project_id'])
             prev_proj_id = datum['project_id']
             # Init slither
-            if datum['project_id'] == 'golem':
+            if datum['project_id'] == 'paxos':
+                subprocess.run(["solc", "use", "0.4.24"], stdout=subprocess.DEVNULL)
+                os.chdir(os.getcwd() + os.sep + datum['project_id'])
+                try:
+                    slither = Slither(cfilename)
+                    os.chdir('..')
+                except:
+                    extract_logger.error("Compilation failed for %s", cfilename)
+                    os.chdir('..')
+                    continue
+            elif datum['project_id'] == 'golem':
                 subprocess.run(["solc", "use", "0.4.23"], stdout=subprocess.DEVNULL)
                 os.chdir(os.getcwd() + os.sep + datum['project_id'])
                 try:
@@ -55,17 +67,6 @@ def encode_function(input_csv, client_list, **kwargs):
                 except:
                     extract_logger.error("Compilation failed for %s", cfilename)
                     os.chdir('../..')
-                    continue
-
-            elif datum['project_id'] == 'paxos':
-                subprocess.run(["solc", "use", "0.4.24"], stdout=subprocess.DEVNULL)
-                os.chdir(os.getcwd() + os.sep + datum['project_id'])
-                try:
-                    slither = Slither(cfilename)
-                    os.chdir('..')
-                except:
-                    extract_logger.error("Compilation failed for %s", cfilename)
-                    os.chdir('..')
                     continue
             
             elif datum['project_id'] == 'ampleforth':
@@ -126,10 +127,21 @@ def encode_function(input_csv, client_list, **kwargs):
                             for node in function.nodes:
                                 if node.expression:
                                     for ir in node.irs:
+                                        #old_stdout = sys.stdout
+                                        #new_stdout = io.StringIO()
+                                        #sys.stdout = new_stdout
+                                        #print(ir)
+                                        #output = new_stdout.getvalue()
+                                        #sys.stdout = old_stdout
+                                        #r[x].append(output)
                                         r[x].append(ir)
 
-    with open('slithIR', 'wb') as f:
-        pickle.dump(r, f)
+    #print(r)
+    #with open('slithIR', 'wb') as f:
+    #    pickle.dump(r, f)
+    w = csv.writer(open("slithIR_serialized_file.csv", "w"))
+    for key, val in r.items():
+        w.writerow([key, val])
 
 if __name__ == "__main__": 
     input_csv = str(input('Enter the issues_dataset.csv path first:\n'))
