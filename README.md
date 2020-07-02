@@ -2,6 +2,11 @@
 
 Do not yet test this tool on `.zip` smart contracts, but on `.sol` ones.
 
+Install `solc-select` via git:
+```
+https://github.com/crytic/solc-select
+```
+
 Use fastText version 0.2.0 and not an upgraded version:
 ```
 $ pip3 install https://github.com/facebookresearch/fastText/archive/0.2.0.zip --user
