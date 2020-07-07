@@ -17,6 +17,8 @@ Fork this specific branch and build from this version of `Slither-simil`:
 git clone -b slither-simil-vul-function  https://github.com/spilehchiha/slither.git
 ```
 
+On git-lfs: Go to this [link.](https://docs.github.com/en/github/managing-large-files/installing-git-large-file-storage)
+
 Some SlithIRs have already been extracted and are located as `datasets/output.csv`.
 
 1. Use the `trainfunction` command to get the cache file consistig of pre-computed vectors for `functions' slithIR csv file:
