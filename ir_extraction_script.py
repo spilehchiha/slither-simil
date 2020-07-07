@@ -43,10 +43,8 @@ def ntype(_type):
         _type = "user_defined_type"  # TODO: this could be Contract, Enum or Struct
     else:
         _type = str(_type)
-
     _type = _type.replace(" memory","")
     _type = _type.replace(" storage ref","")
-
     if "struct" in _type:
         return "struct"
     elif "enum" in _type:
@@ -118,7 +116,6 @@ def encode_ir(ir):
         return 'init_array'
     if isinstance(ir, Function): # TODO: investigate this
         return 'function_solc'
-
     # variables
     if isinstance(ir, Constant):
         return 'constant({})'.format(ntype(ir._type))
@@ -138,7 +135,6 @@ def encode_ir(ir):
         return 'local_variable_init_tuple'
     if isinstance(ir, TupleVariable):
         return 'tuple_variable'
-
     # default
     else:
         extract_logger.error(type(ir),"is missing encoding!")
@@ -150,33 +146,28 @@ def csv_to_json(csv_file_path):
         for row in csv.DictReader(csv_file):
             csv_data.append(row)
     csv_file.close()
-
     return ast.literal_eval(json.dumps(csv_data))
 
 def encode_function(input_csv, client_list, **kwargs):
     function_dict = dict()
-
     input_json = csv_to_json(input_csv)
-
     if 'all' in client_list: # Checks whether the user has typed 'all' as input or not.
         client_list = ['golem', 
                         'nomisma', 
                         'paxos', 
                         'ampleforth', 
-                        'origin-protocol']
+                        'origin-protocol',
+                        'uma',
+                        'vbm']
     else:
         input_json = [datum for datum in input_json if datum['project_id'] in client_list]
-
     previous_project_id = ''
-
     for datum in input_json:
         for cfilename in eval(datum['func_origin_contract_file_name']):            
-            funcname = eval(datum['func'])[eval(datum['func_origin_contract_file_name']).index(cfilename)]   
-
+            funcname = eval(datum['func'])[eval(datum['func_origin_contract_file_name']).index(cfilename)]
             if (datum['project_id'] != previous_project_id):
                 print('processing %s contracts' % datum['project_id'])            
             previous_project_id = datum['project_id']
-
             # Init slither
             if datum['project_id'] == 'golem':
                 subprocess.run(["solc", "use", "0.4.23"], stdout=subprocess.DEVNULL)
@@ -188,7 +179,6 @@ def encode_function(input_csv, client_list, **kwargs):
                     extract_logger.error("Compilation failed for %s", cfilename)
                     os.chdir('..')
                     continue
-
             elif datum['project_id'] == 'paxos':
                 subprocess.run(["solc", "use", "0.4.24"], stdout=subprocess.DEVNULL)
                 os.chdir(os.getcwd() + os.sep + datum['project_id'])
@@ -199,7 +189,6 @@ def encode_function(input_csv, client_list, **kwargs):
                     extract_logger.error("Compilation failed for %s", cfilename)
                     os.chdir('..')
                     continue
-
             elif datum['project_id'] == 'ampleforth':
                 subprocess.run(["solc", "use", "0.4.24"], stdout=subprocess.DEVNULL)
                 os.chdir(os.getcwd() + os.sep + datum['project_id'] + os.sep +'market-oracle')
@@ -210,7 +199,6 @@ def encode_function(input_csv, client_list, **kwargs):
                     extract_logger.error("Compilation failed for %s", cfilename)
                     os.chdir('../..')
                     continue
-
             elif datum['project_id'] == 'nomisma':
                 subprocess.run(["solc", "use", "0.4.24"], stdout=subprocess.DEVNULL)
                 os.chdir(os.getcwd() + os.sep + datum['project_id'] + os.sep + 'BankProtcol')
@@ -221,7 +209,6 @@ def encode_function(input_csv, client_list, **kwargs):
                     extract_logger.error("Compilation failed for %s", cfilename)
                     os.chdir('../..')
                     continue
-
             elif datum['project_id'] == 'origin-protocol':
                 subprocess.run(["solc", "use", "0.4.24"], stdout=subprocess.DEVNULL)
                 os.chdir(os.getcwd() + os.sep + datum['project_id'] + os.sep + 'origin-contracts')
@@ -232,7 +219,36 @@ def encode_function(input_csv, client_list, **kwargs):
                     extract_logger.error("Compilation failed for %s", cfilename)
                     os.chdir('../..')
                     continue
-                
+            elif datum['project_id'] == 'uma':
+                subprocess.run(["solc", "use", "0.4.26"], stdout=subprocess.DEVNULL)
+                os.chdir(os.getcwd() + os.sep + datum['project_id'])
+                try:
+                    slither = Slither('.')
+                    os.chdir('..')
+                except:
+                    extract_logger.error("Compilation failed for %s", cfilename)
+                    os.chdir('..')
+                    continue
+            elif datum['project_id'] == 'celo':
+                subprocess.run(["solc", "use", "0.4.26"], stdout=subprocess.DEVNULL)
+                os.chdir(os.getcwd() + os.sep + datum['project_id'])
+                try:
+                    slither = Slither('.')
+                    os.chdir('..')
+                except:
+                    extract_logger.error("Compilation failed for %s", cfilename)
+                    os.chdir('..')
+                    continue
+            elif datum['project_id'] == 'vbm':
+                subprocess.run(["solc", "use", "0.4.26"], stdout=subprocess.DEVNULL)
+                os.chdir(os.getcwd() + os.sep + datum['project_id'] + os.sep + 'src' + os.sep + 'securevote')
+                try:
+                    slither = Slither('.')
+                    os.chdir('../../..')
+                except:
+                    extract_logger.error("Compilation failed for %s", cfilename)
+                    os.chdir('../../..')
+                    continue 
             # Iterate over all of the contracts
             for contract in slither.contracts:
                 # Iterate over all of the functions
@@ -247,9 +263,7 @@ def encode_function(input_csv, client_list, **kwargs):
                             for node in function.nodes:
                                 if node.expression:
                                     for ir in node.irs:
-                                        function_dict[x].append(encode_ir(ir))
-    
-    
+                                        function_dict[x].append(encode_ir(ir))    
     w = csv.writer(open("output.csv", "w+"))
     for key, val in function_dict.items():
         w.writerow([key, val])
