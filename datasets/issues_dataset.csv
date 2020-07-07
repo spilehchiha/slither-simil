@@ -79,3 +79,12 @@ celo,"[""Attestations.sol""]","[""Attestations""]","[""Attestations.request(byte
 celo,"[""Attestations.sol""]","[""Attestations""]","[""Attestations.addIncompleteAttestations(uint256,Attestations.AttestationsMapping)""]","[""contracts/identity/Attestations.sol""]","[""#610-642""]",timing,High,TOB-CELO-22
 celo,"[""MultiSig.sol""]","[""MultiSig""]","[""MultiSig.replaceOwner(address,address)""]","[""contracts/common/MultiSig.sol""]","[""#165-180""]",data-validation,High,TOB-CELO-23
 celo,"[""Escrow.sol""]","[""Escrow""]","[""Escrow.revoke(address)""]","[""contracts/identity/Escrow.sol""]","[""#185-214""]",data-validation,Medium,TOB-CELO-34
+vbm,"[""ElectionVerification.sol""]","[""ElectionVerification""]","[""ElectionVerification.addBallotTemplateHash(uint256,bytes32)""]","[""src/smart-contracts/contracts/ElectionVerification.sol""]","[""#47-55""]",access-controls,Very High,TOB-VBM-004
+vbm,"[""Election.sol""]","[""Election""]","[""Election.Existing(address)""]","[""src/smart-contracts/contracts/Election.sol""]","[""#34-36""]",access-controls,Very High,TOB-VBM-005
+vbm,"[""VoterRegistry.sol""]","[""VoterRegistry""]","[""VoterRegistry.recordDenial(address,uint256)""]","[""src/smart-contracts/contracts/VoterRegistry.sol""]","[""#122-133""]",access-controls,Very High,TOB-VBM-006
+vbm,"[""Migrations.sol""]","[""Migrations""]","[""Migrations.Migrate()""]","[""src/smart-contracts/contracts/Migrations.sol""]","[""#15-17""]",access-controls,Low,TOB-VBM-010
+vbm,"[""ElectionVerification.sol""]","[""ElectionVerification""]","[""ElectionVerification.addBallotTemplateHash(uint256,bytes32)""]","[""src/smart-contracts/contracts/ElectionVerification.sol""]","[""#47-55""]",data-validation,Low,TOB-VBM-011
+uma,[],[],[],[],[],[],[],TOB-UMA-001
+uma,"[""TokenizedDerivative.sol""]","[""TokenizedDerivativeUtils""]","[""TokenizedDerivativeUtils._computeNavForTokens(int256,uint256)""]","[""contracts/TokenizedDerivative.sol""]","[""#848-848""]",data-validation,Low,TOB-UMA-005
+uma,"[""CentralizedStore.sol""]","[""CentralizedStore""]","[""CentralizedStore.computeOracleFees(uint256,uint256,uint256)""]","[""contracts/CentralizedStore.sol""]","[""#38-41""]",data-validation,Low,TOB-UMA-006
+uma,"[""TokenizedDerivative.sol""]","[""TokenizedDerivativeUtils""]","[""TokenizedDerivativeUtils._updateBalances(TDS.Storage,int256)""]","[""contracts/TokenizedDerivative.sol""]","[""#752-760""]",data-validation,Low,TOB-UMA-011
