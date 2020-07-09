@@ -158,7 +158,8 @@ def encode_function(input_csv, client_list, **kwargs):
                         'ampleforth', 
                         'origin-protocol',
                         'uma',
-                        'vbm']
+                        'vbm',
+                        'celo']
     else:
         input_json = [datum for datum in input_json if datum['project_id'] in client_list]
     previous_project_id = ''
