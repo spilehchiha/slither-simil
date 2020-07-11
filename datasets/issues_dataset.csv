@@ -1,6 +1,4 @@
 project_id,contract_file_name,contract_name,func,func_origin_contract_file_name,func_line_nos.,vulnerability_type,severity,finding_id
-golem,"[""GNTDeposit.sol""]","[""GNTDeposit""]","[""^0.4.16 Different versions of Solidity is used ['^0.4.16', '^0.4.18', '^0.4.19']""]","[""contracts/GNTDeposit.sol""]","[""#1""]",pragma,Informational,TOB-Golem-01
-golem,"[""TokenProxy.sol""]","[""GNTDeposit""]","[""^0.4.19 Different versions of Solidity is used ['^0.4.16', '^0.4.18', '^0.4.19']""]","[""contracts/GNTDeposit.sol""]","[""#1""]",pragma,Informational,TOB-Golem-01
 golem,"[""ERC20.sol""]","[""ERC20""]","[""ERC20.approve(address,uint256)""]","[""contracts/open_zeppelin/ERC20.sol""]","[""#13""]",timing,Medium,TOB-Golem-02
 golem,"[""GolemNetworkTokenBatching_inst.sol""]","[""GolemNetworkTokenBatching""]","[""GolemNetworkTokenBatching.batchTransfer(bytes32,uint256)""]","[""contracts/GolemNetworkTokenBatching_inst.sol""]","[""#30-49""]",data-validation,Low,TOB-Golem-05
 golem,"[""TokenProxy.sol""]","[""TokenProxy""]","[""TokenProxy.withdraw(uint256)""]","[""contracts/GolemNetworkTokenBatching_inst.sol""]","[""#110-112""]",data-validation,Informational,TOB-Golem-06-01
@@ -12,10 +10,6 @@ golem,"[""GNTDeposit.sol""]","[""GNTDeposit""]","[""GNTDeposit.onTokenReceived(a
 golem,"[""GNTDeposit.sol""]","[""GNTDeposit""]","[""GNTDeposit.onTokenReceived(address,uint256,bytes32)""]","[""contracts/GNTDeposit.sol""]","[""#92-95""]",auditing-and-logging,Low,TOB-Golem-11
 golem,"[""GolemNetworkTokenBatching_inst.sol""]","[""GolemNetworkTokenBatching""]","[""GolemNetworkTokenBatching.batchTransfer(bytes32,uint256)""]","[""contracts/GolemNetworkTokenBatching_inst.sol""]","[""#30-49""]",denial-of-service,Low,TOB-Golem-14
 nomisma,"[""BankInitialise.sol""]","[""BankInitialise""]","[""BankInitialise.preinit(address[8],uint256[6],uint256[4],bytes)""]","[""BankProtcol/contracts/BankInitialise.sol""]","[""#78-119""]",access-controls,High,TOB-NOMISMA-001
-nomisma,[],[],[],[],[],data-validation,High,TOB-NOMISMA-003
-nomisma,[],[],[],[],[],error-reporting,High,TOB-NOMISMA-004
-nomisma,[],[],[],[],[],error-reporting,High,TOB-NOMISMA-005
-nomisma,[],[],[],[],[],patching,High,TOB-NOMISMA-006
 nomisma,"[""BankBorrow.sol""]","[""BankBorrow""]","[""BankBorrow.updatePaybackAmountsState(uint256[],uint256[],address)""]","[""BankProtcol/contracts/BankBorrow.sol""]","[""#356-396""]",data-validation,High,TOB-NOMISMA-007
 nomisma,"[""BankBorrow.sol""]","[""BankBorrow""]","[""BankBorrow.payBackLoans(uint256[],uint256[])""]","[""BankProtcol/contracts/BankBorrow.sol""]","[""#25-43""]",access-controls,Medium,TOB-NOMISMA-008-01
 nomisma,"[""BankBorrow.sol""]","[""BankBorrow""]","[""BankBorrow.borrow(ERC20,uint256,uint256)""]","[""BankProtcol/contracts/BankBorrow.sol""]","[""#142-209""]",access-controls,Medium,TOB-NOMISMA-008-02
@@ -25,9 +19,6 @@ nomisma,"[""BankBorrow.sol""]","[""BankBorrow""]","[""BankBorrow.collectPaybackA
 nomisma,"[""BankBorrow.sol""]","[""BankBorrow""]","[""BankBorrow.borrow(ERC20,uint256,uint256)""]","[""BankProtcol/contracts/BankBorrow.sol""]","[""#142-209""]",data-validation,Medium,TOB-NOMISMA-010-02
 nomisma,"[""BankInitialise.sol""]","[""BankInitialise""]","[""BankInitialise.depositInitEquity(uint256,uint256,uint256,uint256,address)""]","[""BankProtcol/contracts/BankInitialise.sol""]","[""#167-222""]",data-validation,Medium,TOB-NOMISMA-010-03
 nomisma,"[""BankInvest.sol""]","[""BankInvest""]","[""BankInvest.collectFunds(uint256,uint256,uint256)""]","[""BankProtcol/contracts/BankInvest.sol""]","[""#121-155""]",data-validation,Medium,TOB-NOMISMA-010-04
-nomisma,[],[],[],[],[],data-validation,Low,TOB-NOMISMA-011
-nomisma,[],[],[],[],[],data-validation,Medium,TOB-NOMISMA-012
-nomisma,[],[],[],[],[],data-valiadtion,Low,TOB-NOMISMA-013
 nomisma,"[""BankBorrow.sol""]","[""BankBorrow""]","[""BankBorrow.payBackLoans(uint256[],uint256[])""]","[""BankProtcol/contracts/BankBorrow.sol""]","[""#25-43""]",data-validation,Low,TOB-NOMISMA-014
 paxos,"[""PAXImplementation.sol""]","[""PAXImplementation""]","[""PAXImplementation.setSupplyController(address)""]","[""contracts/PAXImplementation.sol""]","[""#341-351""]",access-controls,Informational,TOB-Paxos-01-01
 paxos,"[""PAXImplementation.sol""]","[""PAXImplementation""]","[""PAXImplementation.increaseSupply(uint256)""]","[""contracts/PAXImplementation.sol""]","[""#358-364""]",access-controls,Informational,TOB-Paxos-01-02
@@ -84,7 +75,16 @@ vbm,"[""Election.sol""]","[""Election""]","[""Election.Existing(address)""]","["
 vbm,"[""VoterRegistry.sol""]","[""VoterRegistry""]","[""VoterRegistry.recordDenial(address,uint256)""]","[""src/smart-contracts/contracts/VoterRegistry.sol""]","[""#122-133""]",access-controls,Very High,TOB-VBM-006
 vbm,"[""Migrations.sol""]","[""Migrations""]","[""Migrations.Migrate()""]","[""src/smart-contracts/contracts/Migrations.sol""]","[""#15-17""]",access-controls,Low,TOB-VBM-010
 vbm,"[""ElectionVerification.sol""]","[""ElectionVerification""]","[""ElectionVerification.addBallotTemplateHash(uint256,bytes32)""]","[""src/smart-contracts/contracts/ElectionVerification.sol""]","[""#47-55""]",data-validation,Low,TOB-VBM-011
-uma,[],[],[],[],[],[],[],TOB-UMA-001
 uma,"[""TokenizedDerivative.sol""]","[""TokenizedDerivativeUtils""]","[""TokenizedDerivativeUtils._computeNavForTokens(int256,uint256)""]","[""contracts/TokenizedDerivative.sol""]","[""#848-848""]",data-validation,Low,TOB-UMA-005
 uma,"[""CentralizedStore.sol""]","[""CentralizedStore""]","[""CentralizedStore.computeOracleFees(uint256,uint256,uint256)""]","[""contracts/CentralizedStore.sol""]","[""#38-41""]",data-validation,Low,TOB-UMA-006
 uma,"[""TokenizedDerivative.sol""]","[""TokenizedDerivativeUtils""]","[""TokenizedDerivativeUtils._updateBalances(TDS.Storage,int256)""]","[""contracts/TokenizedDerivative.sol""]","[""#752-760""]",data-validation,Low,TOB-UMA-011
+ocean-protocol,"[""Dispenser.sol""]","[""Dispenser""]","[""Dispenser.requestTokens(uint256) ""]","[""contracts/Dispenser.sol""]","[""#85-131""]",access-controls,High,TOB-OceanProtocol-001
+ocean-protocol,"[""EpochLibrary.sol""]","[""EpochLibrary""]","[""EpochLibrary.create(EpochLibrary.EpochList,bytes32,uint256,uint256)""]","[""contracts/EpochLibrary.sol""]","[""#26-56""]",data-validation,medium,TOB-OceanProtocol-002
+ocean-protocol,"[""EpochLibrary.sol""]","[""EpochLibrary""]","[""EpochLibrary.create(EpochLibrary.EpochList,bytes32,uint256,uint256)""]","[""contracts/libraries/EpochLibrary.sol""]","[""#26-56""]",data-validation,Informational,TOB-OceanProtocol-003
+ocean-protocol,"[""EpochLibrary.sol""]","[""EpochLibrary""]","[""EpochLibrary.getEpochTimeOut(EpochLibrary.Epoch)""]","[""contracts/libraries/EpochLibrary.sol""]","[""#96-104""]",denial-of-service,High,TOB-OceanProtocol-004
+ocean-protocol,"[""EpochLibrary.sol""]","[""EpochLibrary""]","[""EpochLibrary.getEpochTimeLock(EpochLibrary.Epoch)""]","[""contracts/libraries/EpochLibrary.sol""]","[""#110-118""]",denial-of-service,High,TOB-OceanProtocol-004
+ocean-protocol,"[""DIDRegistryLibrary.sol""]","[""DIDRegistryLibrary""]","[""DIDRegistryLibrary.update(DIDRegistryLibrary.DIDRegisterList,bytes32,bytes32)""]","[""contracts/registry/DIDRegistryLibrary.sol""]","[""#30-50""]",data-validation,medium,TOB-OceanProtocol-006
+ocean-protocol,"[""Condition.sol""]","[""Condition""]","[""Condition.fulfill(bytes32,ConditionStoreLibrary.ConditionState)""]","[""contracts/conditions/Condition.sol""]","[""#27-36""]",timing,Informational,TOB-OceanProtocol-009
+ocean-protocol,"[""EscrowReward.sol""]","[""EscrowReward""]","[""EscrowReward._transferAndFulfill(bytes32,address,uint256)""]","[""contracts/conditions/rewards/EscrowReward.sol""]","[""#93-109""]",data-validation,informational,TOB-OceanProtocol-011
+ocean-protocol,"[""OceanToken.sol""]","[""OceanToken""]","[""OceanToken.initialize(address,address)""]","[""contracts/OceanToken.sol""]","[""#24-40""]",data-validation,low,TOB-OceanProtocol-012
+ocean-protocol,"[""Dispenser.sol""]","[""Dispenser""]","[""Dispenser.initialize(address,address)""]","[""contracts/Dispenser.sol""]","[""#59-78""]",data-validation,medium,TOB-OceanProtocol-015
