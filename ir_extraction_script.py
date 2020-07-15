@@ -160,7 +160,7 @@ def encode_function(input_csv, client_list, **kwargs):
                         'uma',
                         'vbm',
                         'celo',
-                        'etc']
+                        'ocean-protocols']
     else:
         input_json = [datum for datum in input_json if datum['project_id'] in client_list]
     previous_project_id = ''
@@ -251,14 +251,16 @@ def encode_function(input_csv, client_list, **kwargs):
                     extract_logger.error("Compilation failed for %s", cfilename)
                     os.chdir('../../..')
                     continue
-            elif datum['project_id'] == 'etc':
+            elif datum['project_id'] == 'ocean-protocol':
                 subprocess.run(["solc", "use", "0.4.26"], stdout=subprocess.DEVNULL)
                 
                 try:
-                    slither = Slither('MetaCoin.sol')
+                    slither = Slither('.')
+                    os.chdir('..')
                     
                 except:
                     extract_logger.error("Compilation failed for %s", cfilename)
+                    os.chdir('..')
                     
                     continue 
             # Iterate over all of the contracts
