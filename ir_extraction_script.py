@@ -4,7 +4,6 @@ import json
 import ast
 import subprocess
 import os
-# import pickle
 
 from slither import Slither
 from slither.core.declarations import Structure, Enum, SolidityVariableComposed, SolidityVariable, Function
@@ -124,17 +123,17 @@ def encode_ir(ir):
     if isinstance(ir, SolidityVariable):
         return 'solidity_variable{}'.format(ir.name)
     if isinstance(ir, TemporaryVariable):
-        return 'temporary_variable'
+        return 'temporary_variable({})'.format(ntype(ir._type))
     if isinstance(ir, ReferenceVariable):
         return 'reference({})'.format(ntype(ir._type)) 
     if isinstance(ir, LocalVariable):
-        return 'local_solc_variable({})'.format(ir._location) 
+        return 'local_solc_variable({}, {})'.format(ir._location, ir._type) 
     if isinstance(ir, StateVariable):
         return 'state_solc_variable({})'.format(ntype(ir._type))
     if isinstance(ir, LocalVariableInitFromTuple):
-        return 'local_variable_init_tuple'
+        return 'local_variable_init_tuple({})'.format(ntype(ir._type))
     if isinstance(ir, TupleVariable):
-        return 'tuple_variable'
+        return 'tuple_variable{})'.format(ntype(ir._type))
     # default
     else:
         extract_logger.error(type(ir),"is missing encoding!")
@@ -253,8 +252,7 @@ def encode_function(input_csv, client_list, **kwargs):
                     continue
             elif datum['project_id'] == 'ocean-protocol':
                 subprocess.run(["solc", "use", "0.4.26"], stdout=subprocess.DEVNULL)
-				os.chdir(os.getcwd() + os.sep + datum['project_id'])
-                
+                os.chdir(os.getcwd() + os.sep + datum['project_id'])
                 try:
                     slither = Slither('.')
                     os.chdir('..')
@@ -278,15 +276,15 @@ def encode_function(input_csv, client_list, **kwargs):
                             for node in function.nodes:
                                 if node.expression:
                                     for ir in node.irs:
-                                        function_dict[x].append(encode_ir(ir))    
+                                        if hasattr(ir, 'destination') and ir.destination == 'SafeMath':
+                                            function_dict[x].append(encode_ir(ir) + '_SafeMath_' + str(ir.function))
+                                        else:
+                                            function_dict[x].append(encode_ir(ir))
     w = csv.writer(open("output.csv", "w+"))
     for key, val in function_dict.items():
         w.writerow([key, val])
     return function_dict
-    # Warning! Pickling is incosistent! Slither.Slithir objects might not unpickle.
-    # with open('slithIR_serialized_file.txt', 'wb') as f:
-    #     pickle.dump(function_dict, f)
-    # f.close()
+
 
 if __name__ == "__main__":
     input_csv = str(input("Enter the path for the csv file named issues_dataset.csv first:\n"))
