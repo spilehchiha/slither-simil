@@ -16,6 +16,7 @@ from slither.slithir.operations import Assignment, Index, Member, Length, Balanc
     SolidityCall, Push, Delete, EventCall, LibraryCall, InternalDynamicCall, \
     HighLevelCall, LowLevelCall, TypeConversion, Return, Transfer, Send, Unpack, InitArray, InternalCall
 from slither.slithir.variables import TemporaryVariable, TupleVariable, Constant, ReferenceVariable
+from crytic_compile import compile_all
 
 extract_logger = logging.getLogger("Slither-extract")
 compiler_logger = logging.getLogger("CryticCompile")
@@ -98,7 +99,10 @@ def encode_ir(ir):
     if isinstance(ir, InternalDynamicCall):
         return 'internal_dynamic_call'
     if isinstance(ir, HighLevelCall): # TODO: improve
-        return 'high_level_call'
+        if str(ir.function) == 'transfer':
+            return 'high_level_call_transfer'
+        else:
+            return 'high_level_call'
     if isinstance(ir, LowLevelCall): # TODO: improve
         return 'low_level_call'
     if isinstance(ir, TypeConversion):
@@ -162,124 +166,102 @@ def encode_function(input_csv, client_list, **kwargs):
                         'ocean-protocol']
     else:
         input_json = [datum for datum in input_json if datum['project_id'] in client_list]
+    
     previous_project_id = ''
+    flag = False
     for datum in input_json:
+        
         for cfilename in eval(datum['func_origin_contract_file_name']):            
             funcname = eval(datum['func'])[eval(datum['func_origin_contract_file_name']).index(cfilename)]
+            
             if (datum['project_id'] != previous_project_id):
-                print('processing %s contracts' % datum['project_id'])            
-            previous_project_id = datum['project_id']
+                flag = True
+                print('processing %s contracts' % datum['project_id'])           
+            
             # Init slither
             if datum['project_id'] == 'golem':
-                subprocess.run(["solc", "use", "0.4.23"], stdout=subprocess.DEVNULL)
-                os.chdir(os.getcwd() + os.sep + datum['project_id'])
-                try:
-                    slither = Slither(cfilename)
-                    os.chdir('..')
-                except:
-                    extract_logger.error("Compilation failed for %s", cfilename)
-                    os.chdir('..')
-                    continue
+                if flag == True:
+                    compilation = compile_all(os.getcwd() + '/golem/g.zip')
+                else:
+                    pass
+            
             elif datum['project_id'] == 'paxos':
-                subprocess.run(["solc", "use", "0.4.24"], stdout=subprocess.DEVNULL)
-                os.chdir(os.getcwd() + os.sep + datum['project_id'])
-                try:
-                    slither = Slither(cfilename)
-                    os.chdir('..')
-                except:
-                    extract_logger.error("Compilation failed for %s", cfilename)
-                    os.chdir('..')
-                    continue
+                if flag == True:
+                    compilation = compile_all(os.getcwd() + '/paxos/contracts/p.zip')
+                else:
+                    pass
+            
             elif datum['project_id'] == 'ampleforth':
-                subprocess.run(["solc", "use", "0.4.24"], stdout=subprocess.DEVNULL)
-                os.chdir(os.getcwd() + os.sep + datum['project_id'] + os.sep +'market-oracle')
-                try:
-                    slither = Slither('.')
-                    os.chdir('../..')
-                except:
-                    extract_logger.error("Compilation failed for %s", cfilename)
-                    os.chdir('../..')
-                    continue
+                if flag == True:
+                    compilation_am = compile_all(os.getcwd() + '/ampleforth/market-oracle/am.zip')
+                    compilation2_au = compile_all(os.getcwd() + '/ampleforth/uFragments/au.zip')
+                    compilation = compilation_am + compilation2_au
+                else:
+                    pass
+            
             elif datum['project_id'] == 'nomisma':
-                subprocess.run(["solc", "use", "0.4.24"], stdout=subprocess.DEVNULL)
-                os.chdir(os.getcwd() + os.sep + datum['project_id'] + os.sep + 'BankProtcol')
-                try:
-                    slither = Slither('.')
-                    os.chdir('../..')
-                except:
-                    extract_logger.error("Compilation failed for %s", cfilename)
-                    os.chdir('../..')
-                    continue
+                if flag == True:
+                    compilation_bp = compile_all(os.getcwd() + '/nomisma/BankProtcol/bp.zip')
+                    compilation_e = compile_all(os.getcwd() + '/nomisma/EthereumSmartContracts/e.zip')
+                    compilation = compilation_bp + compilation_e
+                else:
+                    pass
+            
             elif datum['project_id'] == 'origin-protocol':
-                subprocess.run(["solc", "use", "0.4.24"], stdout=subprocess.DEVNULL)
-                os.chdir(os.getcwd() + os.sep + datum['project_id'] + os.sep + 'origin-contracts')
-                try:
-                    slither = Slither('contracts/marketplace/v00/Marketplace.sol')
-                    os.chdir('../..')
-                except:
-                    extract_logger.error("Compilation failed for %s", cfilename)
-                    os.chdir('../..')
-                    continue
+                if flag == True:
+                    compilation = compile_all(os.getcwd() + '/origin-contracts/contracts/o.zip')
+                else:
+                    pass
+            
             elif datum['project_id'] == 'uma':
-                subprocess.run(["solc", "use", "0.4.26"], stdout=subprocess.DEVNULL)
-                os.chdir(os.getcwd() + os.sep + datum['project_id'])
-                try:
-                    slither = Slither('.')
-                    os.chdir('..')
-                except:
-                    extract_logger.error("Compilation failed for %s", cfilename)
-                    os.chdir('..')
-                    continue
+                if flag == True:
+                    compilation = compile_all(os.getcwd() + '/uma/u.zip')
+                else:
+                    pass
+            
             elif datum['project_id'] == 'celo':
-                subprocess.run(["solc", "use", "0.4.26"], stdout=subprocess.DEVNULL)
-                os.chdir(os.getcwd() + os.sep + datum['project_id'])
-                try:
-                    slither = Slither('.')
-                    os.chdir('..')
-                except:
-                    extract_logger.error("Compilation failed for %s", cfilename)
-                    os.chdir('..')
-                    continue
+                if flag == True:
+                    compilation = compile_all(os.getcwd() + '/celo/c.zip')
+                else:
+                    pass
+            
             elif datum['project_id'] == 'vbm':
-                subprocess.run(["solc", "use", "0.4.26"], stdout=subprocess.DEVNULL)
-                os.chdir(os.getcwd() + os.sep + datum['project_id'] + os.sep + 'src' + os.sep + 'securevote')
-                try:
-                    slither = Slither('.')
-                    os.chdir('../../..')
-                except:
-                    extract_logger.error("Compilation failed for %s", cfilename)
-                    os.chdir('../../..')
-                    continue
+                if flag == True:
+                    compilation = compile_all(os.getcwd() + '/vbm/src/securevote/v.zip')
+                else:
+                    pass
+            
             elif datum['project_id'] == 'ocean-protocol':
-                subprocess.run(["solc", "use", "0.4.26"], stdout=subprocess.DEVNULL)
-                os.chdir(os.getcwd() + os.sep + datum['project_id'])
-                try:
-                    slither = Slither('.')
-                    os.chdir('..')
-                    
-                except:
-                    extract_logger.error("Compilation failed for %s", cfilename)
-                    os.chdir('..')
-                    
-                    continue 
+                if flag == True:
+                    compilation = compile_all(os.getcwd() + '/ocean-protocol/o.zip')
+                else:
+                    pass
+            
+            previous_project_id = datum['project_id'] 
+            
             # Iterate over all of the contracts
-            for contract in slither.contracts:
-                # Iterate over all of the functions
-                for function in contract.functions_declared:
-                    if function.canonical_name == funcname:
-                        if function.contract_declarer == contract:
-                            if function.nodes == [] or function.is_constructor_variables:
-                                continue
-                            x = (datum['project_id'], cfilename, contract.name, function.name)
-                            function_dict[x] = []
-                            # Iterate over the nodes of the function
-                            for node in function.nodes:
-                                if node.expression:
-                                    for ir in node.irs:
-                                        if hasattr(ir, 'destination') and ir.destination == 'SafeMath':
-                                            function_dict[x].append(encode_ir(ir) + '_SafeMath_' + str(ir.function))
-                                        else:
-                                            function_dict[x].append(encode_ir(ir))
+            for c in compilation:
+                slither = Slither(c)
+                for contract in slither.contracts:
+                    if str(contract.contract_kind) != 'library':
+                        # Iterate over all of the functions
+                        for function in contract.functions_declared:
+                            if function.canonical_name == funcname:
+                                if function.contract_declarer == contract:
+                                    if function.nodes == [] or function.is_constructor_variables:
+                                        continue
+                                    x = (datum['project_id'], cfilename, contract.name, function.name)
+                                    function_dict[x] = []
+                                    
+                                    # Iterate over the nodes of the function
+                                    for node in function.nodes:
+                                        if node.expression:
+                                            for ir in node.irs:
+                                                if hasattr(ir, 'destination') and ir.destination == 'SafeMath':
+                                                    function_dict[x].append(encode_ir(ir) + '_SafeMath_' + str(ir.function))
+                                                else:
+                                                    function_dict[x].append(encode_ir(ir))
+    
     w = csv.writer(open("output.csv", "w+"))
     for key, val in function_dict.items():
         w.writerow([key, val])
