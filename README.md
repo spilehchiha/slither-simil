@@ -1,6 +1,6 @@
 # SlithIR Extraction and Processing
 
-Install `solc-select` via git:
+Install `solc-select` via git (Use on Linux for now.):
 ```
 https://github.com/crytic/solc-select
 ```
