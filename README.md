@@ -1,5 +1,10 @@
 # SlithIR Extraction and Processing
 
+There is a wiki page available for `slither-simil` on this [page.](https://github.com/crytic/slither/wiki/Code-Similarity-detector)
+
+
+## Installation adn Setup
+
 Install `solc-select` via git (Use on Linux for now.):
 ```
 https://github.com/crytic/solc-select
