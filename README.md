@@ -12,7 +12,7 @@ Install `solc-select` via git (Use on Linux for now.):
 https://github.com/crytic/solc-select
 ```
 
-Fork this specific branch and build from this version of `Slither-simil`:
+Fork this branch and build from this version of `Slither-simil`:
 ```
 git clone -b slither-simil-vul-function  https://github.com/spilehchiha/slither.git
 ```
