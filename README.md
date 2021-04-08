@@ -23,7 +23,7 @@ https://github.com/spilehchiha/crytic-compile/tree/dev-zip
 
 Take the `output.csv` (in the private issues repo) file and the `datasets/15kdump_model.bin` file already in the repository and use it as follows:
 
-slither-simil test [datasets/15kdump_model.bin] --filename [file_name] --fname [function_name]  --input [input_file] --ntop [n]
+`slither-simil test [datasets/15kdump_model.bin] --filename [file_name] --fname [function_name]  --input [input_file] --ntop [n]`
 
 [file_name]: can be a singleton file name or a directory path, containing multiple smart contracts either in .sol or .zip formats or a combination of both
 
