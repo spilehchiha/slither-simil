@@ -3,14 +3,14 @@
 There is a wiki page available for `slither-simil` on this [page.](https://github.com/crytic/slither/wiki/Code-Similarity-detector)
 
 
-## Installation adn Setup
+## Installation and Setup
 
 Install `solc-select` via git (Use on Linux for now.):
 ```
 https://github.com/crytic/solc-select
 ```
 
-Fork this specific branch and build from this version of `Slither-simil`:
+Fork this branch and build from this version of `Slither-simil`:
 ```
 git clone -b slither-simil-vul-function  https://github.com/spilehchiha/slither.git
 ```
